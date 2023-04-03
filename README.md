@@ -6,6 +6,10 @@ Robo-GPT is a simple and extensible program that helps you run GPT-4 model auton
 
 The program was inspired by some of my earlier research and Auto-GPT.
 
+## Simple Demo
+
+https://user-images.githubusercontent.com/241499/229651726-a441f569-44c9-4cc9-a128-dd1c386e2981.mov
+
 ## Features
 
 The features are very limited at the moment, but more can be added easily.

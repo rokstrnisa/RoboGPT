@@ -1,0 +1,8 @@
+{
+    "python.analysis.typeCheckingMode": "basic",
+    "python.linting.pylintArgs": ["--rcfile=${workspaceFolder}/.pylintrc"],
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true,
+    "prettier.tabWidth": 4,
+    "prettier.printWidth": 200
+}

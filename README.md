@@ -16,15 +16,15 @@ The features are very limited at the moment, but more can be added easily.
 
 ## Requirements
 
--   Python 3.10 or later
--   OpenAI API key with access to GPT-4 API
--   ElevenLabs key (optional for speech)
+-   Python 3.10 or later.
+-   OpenAI API key with access to [gpt-4 model](https://platform.openai.com/docs/models/gpt-4). At the time of writing, you need to join a waitlist and OpenAI will give you access when capacity is available.
+-   ElevenLabs key (optional for speech).
 
 ## Setup
 
--   Install `pipenv`.
+-   Install [`pipenv`](https://pypi.org/project/pipenv/).
 -   Clone this repo and change directory to it.
--   Run `pipenv install` to install the dependencies.
+-   Run `pipenv shell` to enter the Python virtual environment and `pipenv install` to install the dependencies.
 -   Rename `.env.template` to `.env` and fill in your [`OPENAI_API_KEY`](https://platform.openai.com/account/api-keys),
     and optionally [`ELEVEN_LABS_API_KEY`](https://elevenlabs.io) (for speech).
 

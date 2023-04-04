@@ -8,7 +8,6 @@ openai = "*"
 playsound = "*"
 tiktoken = "*"
 python-dotenv = "*"
-pyobjc = "*"
 
 [dev-packages]
 pylint = "*"

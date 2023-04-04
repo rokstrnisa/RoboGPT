@@ -94,9 +94,9 @@ def main():
             if metadata.criticism.strip() != "":
                 print(f"SELF-CRITICISM: {metadata.criticism}")
         # Comment out the 3 lines below to remove the confirmation step before running the action.
-        # run_action = input("Run the action? [Y/n]")
-        # if run_action.lower() != "y" and run_action != "":
-        #     break
+        run_action = input("Run the action? [Y/n]")
+        if run_action.lower() != "y" and run_action != "":
+            break
         action_output = action_runner.run(action)
         message_content = f"Action {action.key()} returned:\n{action_output}"
         message_history.append({"role": "system", "content": message_content})

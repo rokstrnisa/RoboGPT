@@ -8,7 +8,7 @@ The program was inspired by [some of my earlier work](https://blog.rok.strnisa.c
 
 ## Simple Demo
 
-https://user-images.githubusercontent.com/241499/229651726-a441f569-44c9-4cc9-a128-dd1c386e2981.mov
+[![A simple demo of RoboGPT.](https://img.youtube.com/vi/mi0D4l7JRtQ/0.jpg)](https://www.youtube.com/watch?v=mi0D4l7JRtQ)
 
 ## Features
 

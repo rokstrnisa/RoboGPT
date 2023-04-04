@@ -1,4 +1,5 @@
 import os
+import sys
 import time
 from typing import Optional
 import openai
@@ -33,8 +34,11 @@ def chat(user_directions: str, general_directions: str, new_plan: Optional[str],
         request_token_count += message_token_count
         messages.insert(insert_history_at, message)
     available_response_tokens = COMBINED_TOKEN_LIMIT - request_token_count
-    # print(messages)
-    # print(available_response_tokens)
+    # print("=== MESSAGES START ===")
+    # for message in messages:
+    #     print(message["role"], message["content"][:100], count_tokens([message]))
+    # print("=== MESSAGES END ===")
+    # print(f"available_response_tokens: {available_response_tokens}")
     assistant_response = send_message(messages, available_response_tokens)
     message_history.append(user_message)
     message_history.append({"role": "assistant", "content": assistant_response})

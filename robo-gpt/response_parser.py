@@ -38,6 +38,18 @@ def parse(text: str) -> Tuple[actions.Action, Metadata]:
         action = actions.RunPythonAction(first_line[11:].strip())
         metadata = parse_metadata(lines[1:])
         return action, metadata
+    if first_line.startswith("SEARCH_ONLINE:"):
+        action = actions.SearchOnlineAction(first_line[14:].strip())
+        metadata = parse_metadata(lines[1:])
+        return action, metadata
+    if first_line.startswith("EXTRACT_INFO:"):
+        parts = first_line[13:].strip()
+        parts = parts.split(",", 1)
+        url = parts[0].strip().strip('"')
+        instructions = parts[1].strip()
+        action = actions.ExtractInfoAction(url, instructions)
+        metadata = parse_metadata(lines[1:])
+        return action, metadata
     if first_line.startswith("SHUTDOWN"):
         action = actions.ShutdownAction()
         metadata = parse_metadata(lines[1:])

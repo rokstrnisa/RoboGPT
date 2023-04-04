@@ -45,6 +45,29 @@ class RunPythonAction(Action):
 
 
 @dataclass(frozen=True)
+class SearchOnlineAction(Action):
+    query: str
+
+    def key(self) -> str:
+        return "SEARCH_ONLINE"
+
+    def short_string(self) -> str:
+        return f"Search online for `{self.query}`."
+
+
+@dataclass(frozen=True)
+class ExtractInfoAction(Action):
+    url: str
+    instructions: str
+
+    def key(self) -> str:
+        return "EXTRACT_INFO"
+
+    def short_string(self) -> str:
+        return f"Extract info from `{self.url}`: {self.instructions}."
+
+
+@dataclass(frozen=True)
 class ShutdownAction(Action):
     def key(self):
         return "SHUTDOWN"

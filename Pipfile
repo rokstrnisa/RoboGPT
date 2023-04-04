@@ -8,6 +8,8 @@ openai = "*"
 playsound = "*"
 tiktoken = "*"
 python-dotenv = "*"
+googlesearch-python = "*"
+selenium = "*"
 
 [dev-packages]
 pylint = "*"

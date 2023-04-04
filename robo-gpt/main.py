@@ -1,6 +1,7 @@
 import os
 from typing import Optional
 from dotenv import load_dotenv
+import requests
 from spinner import Spinner
 import actions
 import response_parser
@@ -39,16 +40,23 @@ WRITE_FILE: <PATH>
 
 RUN_PYTHON: <PATH>
 
-4. "SHUTDOWN": shut down the program. The schema for the action is:
+4. "SEARCH_ONLINE": search online and get back a list of URLs relevant to the query. The schema for the action is:
+
+SEARCH_ONLINE: <QUERY>
+
+5. EXTRACT_INFO: extract specific information from a webpage. The schema for the action is:
+
+EXTRACT_INFO: <URL>, <a brief instruction to GPT for information to extract>
+
+6. "SHUTDOWN": shut down the program. The schema for the action is:
 
 SHUTDOWN
 
 
 RESOURCES:
 1. File contents after reading file.
-2. Code evaluation results.
-3. Improved code.
-4. Output of running a Python file.
+2. Online search results returning URLs.
+3. Output of running a Python file.
 
 
 PERFORMANCE EVALUATION:
@@ -68,7 +76,8 @@ After the action, also write the following metadata JSON object, which must be p
     "speak": "<a short summary of thoughts to say to the user>"
 }
 
-Do not write anything else.
+If you want to run an action that is not in the above list of actions, send the SHUTDOWN action instead and explain which action you wanted to run in the metadata JSON object.
+So, write one action and one metadata JSON object, nothing else.
 """
 
 
@@ -79,7 +88,7 @@ def main():
     new_plan: Optional[str] = None
     while True:
         print("========================")
-        with Spinner("Thinking... "):
+        with Spinner("Thinking..."):
             assistant_response = gpt.chat(user_directions, general_directions, new_plan, message_history)
         action, metadata = response_parser.parse(assistant_response)
         print(f"ACTION: {action.short_string()}")

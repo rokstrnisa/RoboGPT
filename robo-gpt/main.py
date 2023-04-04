@@ -1,4 +1,5 @@
 import os
+from typing import Optional
 from dotenv import load_dotenv
 from spinner import Spinner
 import actions
@@ -70,21 +71,20 @@ After the action, also write the following metadata JSON object, which must be p
 Do not write anything else.
 """
 
-user_input = "Determine which next action to use, and write one valid action, a newline, and one valid metadata JSON object, both according to the specified schema:"
-
 
 def main():
     user_directions = input("What would you like me to do:\n")
     load_dotenv()
     os.chdir("workspace")
+    new_plan: Optional[str] = None
     while True:
         print("========================")
         with Spinner("Thinking... "):
-            assistant_response = gpt.chat(user_directions, general_directions, user_input, message_history)
+            assistant_response = gpt.chat(user_directions, general_directions, new_plan, message_history)
         action, metadata = response_parser.parse(assistant_response)
         print(f"ACTION: {action.short_string()}")
-        # Comment out below if you don't want to use speech.
-        speech.say_async(metadata.speak)
+        # Uncomment the line below if you would like to use speech.
+        # speech.say_async(metadata.speak)
         if isinstance(action, actions.ShutdownAction):
             print("Shutting down...")
             break
@@ -100,6 +100,11 @@ def main():
         action_output = action_runner.run(action)
         message_content = f"Action {action.key()} returned:\n{action_output}"
         message_history.append({"role": "system", "content": message_content})
+        change_plan = input("Change the proposed plan? [N/y]")
+        if change_plan.lower() == "y":
+            new_plan = input("What would you like me to change the plan to? ")
+        else:
+            new_plan = None
 
 
 if __name__ == "__main__":

@@ -1,5 +1,6 @@
 import os
 import time
+from typing import Optional
 import openai
 import tiktoken
 
@@ -12,11 +13,16 @@ MAX_REQUEST_TOKENS = COMBINED_TOKEN_LIMIT - MAX_RESPONSE_TOKENS
 ENCODING = tiktoken.encoding_for_model(MODEL)
 TOKENS_PER_MESSAGE = 3
 TOKENS_PER_NAME = 1
+USER_INPUT_SUFFIX = "Determine which next action to use, and write one valid action, a newline, and one valid metadata JSON object, both according to the specified schema:"
 
 
-def chat(user_directions: str, general_directions: str, user_message_content: str, message_history):
+def chat(user_directions: str, general_directions: str, new_plan: Optional[str], message_history):
     system_message_content = f"{user_directions}\n{general_directions}"
     system_message = {"role": "system", "content": system_message_content}
+    user_message_content = USER_INPUT_SUFFIX
+    if new_plan is not None:
+        user_message_content = f"Change your plan to: {new_plan}\n{user_message_content}"
+    print("user_message_content: ", user_message_content)
     user_message = {"role": "user", "content": user_message_content}
     messages = [system_message, user_message]
     insert_history_at = len(messages) - 1

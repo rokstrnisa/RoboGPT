@@ -4,7 +4,7 @@
 
 Robo-GPT is a simple and extensible program that helps you run GPT-4 model autonomously. It is designed to be easy to understand, so that anyone can use it and extend it.
 
-The program was inspired by some of my earlier research and Auto-GPT.
+The program was inspired by [some of my earlier work](https://blog.rok.strnisa.com/2023/04/how-i-got-chatgpt-to-write-complete.html) and Auto-GPT.
 
 ## Simple Demo
 
@@ -17,7 +17,8 @@ The features are very limited at the moment, but more can be added easily.
 ## Requirements
 
 -   Python 3.10 or later.
--   OpenAI API key with access to [gpt-4 model](https://platform.openai.com/docs/models/gpt-4). At the time of writing, you need to join a waitlist and OpenAI will give you access when capacity is available.
+-   OpenAI API key with access to [gpt-4 model](https://platform.openai.com/docs/models/gpt-4).
+    At the time of writing, you need to join a waitlist, and OpenAI will give you access when capacity is available.
 -   ElevenLabs key (optional for speech).
 
 ## Setup
@@ -30,7 +31,7 @@ The features are very limited at the moment, but more can be added easily.
 
 ## Usage
 
-Run `pipenv run python robo-gpt/main.py` to start the program.
+Run `python robo-gpt/main.py` to start the program.
 
 ## Continuous Mode
 

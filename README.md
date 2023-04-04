@@ -17,7 +17,7 @@ The features are very limited at the moment, but more can be added easily.
 ## Requirements
 
 -   Python 3.10 or later
--   OpenAI API key
+-   OpenAI API key with access to GPT-4 API
 -   ElevenLabs key (optional for speech)
 
 ## Setup

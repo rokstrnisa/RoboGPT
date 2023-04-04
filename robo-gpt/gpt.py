@@ -22,7 +22,6 @@ def chat(user_directions: str, general_directions: str, new_plan: Optional[str],
     user_message_content = USER_INPUT_SUFFIX
     if new_plan is not None:
         user_message_content = f"Change your plan to: {new_plan}\n{user_message_content}"
-    print("user_message_content: ", user_message_content)
     user_message = {"role": "user", "content": user_message_content}
     messages = [system_message, user_message]
     insert_history_at = len(messages) - 1

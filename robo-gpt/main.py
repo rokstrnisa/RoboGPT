@@ -84,6 +84,7 @@ So, write one action and one metadata JSON object, nothing else.
 def main():
     user_directions = input("What would you like me to do:\n")
     load_dotenv()
+    os.makedirs("workspace", exist_ok=True)
     os.chdir("workspace")
     new_plan: Optional[str] = None
     while True:

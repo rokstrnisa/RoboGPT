@@ -1,5 +1,6 @@
 # RoboGPT: A simple autonomous GPT-4 runner
 
+[![](https://dcbadge.vercel.app/api/server/98KeRysd?style=flat)](https://discord.gg/98KeRysd)
 [![Twitter Follow](https://img.shields.io/twitter/follow/rokstrnisa?style=social)](https://twitter.com/intent/follow?screen_name=rokstrnisa)
 
 RoboGPT is a simple and extensible program that helps you run GPT-4 model autonomously. It is designed to be easy to understand, so that anyone can use it and extend it.

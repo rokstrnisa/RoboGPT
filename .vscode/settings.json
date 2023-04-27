@@ -4,5 +4,10 @@
     "python.linting.pylintEnabled": true,
     "python.linting.enabled": true,
     "prettier.tabWidth": 4,
-    "prettier.printWidth": 200
+    "prettier.printWidth": 200,
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+    "python.formatting.provider": "none",
+    "python.analysis.extraPaths": ["./robogpt"]
 }

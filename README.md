@@ -1,8 +1,8 @@
-# Robo-GPT: A simple autonomous GPT-4 runner
+# RoboGPT: A simple autonomous GPT-4 runner
 
 [![Twitter Follow](https://img.shields.io/twitter/follow/rokstrnisa?style=social)](https://twitter.com/intent/follow?screen_name=rokstrnisa)
 
-Robo-GPT is a simple and extensible program that helps you run GPT-4 model autonomously. It is designed to be easy to understand, so that anyone can use it and extend it.
+RoboGPT is a simple and extensible program that helps you run GPT-4 model autonomously. It is designed to be easy to understand, so that anyone can use it and extend it.
 
 The program was inspired by [some of my earlier work](https://blog.rok.strnisa.com/2023/04/how-i-got-chatgpt-to-write-complete.html) and Auto-GPT.
 
@@ -31,7 +31,7 @@ The features are very limited at the moment, but more can be added easily.
 
 ## Usage
 
-Run `python robo-gpt/main.py` to start the program.
+Run `python robogpt/main.py` to start the program.
 
 ## Continuous Mode
 

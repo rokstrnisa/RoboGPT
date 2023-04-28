@@ -1,15 +1,14 @@
 from dataclasses import dataclass
-from typing import Tuple
-import actions
+from typing import Optional, Tuple
 import json
+import actions
 
 
 @dataclass(frozen=True)
 class Metadata:
-    criticism: str
     reason: str
     plan: list[str]
-    speak: str
+    speak: Optional[str] = None
 
 
 def parse(text: str) -> Tuple[actions.Action, Metadata]:
@@ -62,16 +61,10 @@ def parse(text: str) -> Tuple[actions.Action, Metadata]:
 
 
 def parse_metadata(lines: list[str]) -> Metadata:
-    last_line_index = 1
-    for line in lines:
-        if line.startswith("}"):
-            break
-        last_line_index += 1
-    metadata_text = "\n".join(lines[:last_line_index]).strip()
+    metadata_text = "\n".join(lines).strip()
     metadata_json = json.loads(metadata_text)
     return Metadata(
-        criticism=metadata_json["criticism"],
         reason=metadata_json["reason"],
         plan=metadata_json["plan"],
-        speak=metadata_json["speak"],
+        speak=metadata_json.get("speak"),
     )

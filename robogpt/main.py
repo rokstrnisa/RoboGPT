@@ -13,7 +13,7 @@ import gpt
 message_history = []
 
 
-GENERAL_DIRECTIONS = """
+GENERAL_DIRECTIONS_PREFIX = """
 CONSTRAINTS:
 - Cannot run Python code that requires user input.
 
@@ -67,16 +67,9 @@ PERFORMANCE EVALUATION:
 
 Write only one action. The action must one of the actions specified above and must be written according to the schema specified above.
 
-After the action, also write the following metadata JSON object, which must be parsable by Python's json.loads():
-{
-    "criticism": "<constructive self-criticism of actions performed so far, if any>",
-    "reason": "<a sentence explaining the action above>",
-    "plan": "<a short high-level plan in plain English>",
-    "speak": "<a short summary of thoughts to say to the user>"
-}
-
-If you want to run an action that is not in the above list of actions, send the SHUTDOWN action instead and explain which action you wanted to run in the metadata JSON object.
-So, write one action and one metadata JSON object, nothing else.
+After the action, write a JSON object (parseable by Python's json.loads()) which must contain the following keys:
+- "reason": a short sentence explaining the action above
+- "plan": a short high-level plan in plain English
 """
 
 FLAG_VERBOSE = "--verbose"
@@ -85,20 +78,27 @@ FLAG_CONTINUOUS = "--continuous"
 
 
 def main():
-    user_directions = input("What would you like me to do:\n")
+    general_directions = GENERAL_DIRECTIONS_PREFIX
+    if FLAG_SPEECH in sys.argv[1:]:
+        general_directions += '- "speak": a short summary of thoughts to say to the user'
+    general_directions += "\n\n"
+    general_directions += "If you want to run an action that is not in the above list of actions, send the SHUTDOWN action instead and explain in 'reason' which action you wanted to run.\n"
+    general_directions += "So, write one action and one metadata JSON object, nothing else."
+    print(general_directions)
     load_dotenv()
     os.makedirs("workspace", exist_ok=True)
     os.chdir("workspace")
     new_plan: Optional[str] = None
+    user_directions = input("What would you like me to do:\n")
     while True:
         print("========================")
         with Spinner("Thinking..."):
-            assistant_response = gpt.chat(user_directions, GENERAL_DIRECTIONS, new_plan, message_history)
+            assistant_response = gpt.chat(user_directions, GENERAL_DIRECTIONS_PREFIX, new_plan, message_history)
         if FLAG_VERBOSE in sys.argv[1:]:
             print(f"ASSISTANT RESPONSE: {assistant_response}")
         action, metadata = response_parser.parse(assistant_response)
         print(f"ACTION: {action.short_string()}")
-        if FLAG_SPEECH in sys.argv[1:]:
+        if FLAG_SPEECH in sys.argv[1:] and metadata.speak is not None:
             speech.say_async(metadata.speak)
         if isinstance(action, actions.ShutdownAction):
             print("Shutting down...")
@@ -106,8 +106,6 @@ def main():
         else:
             print(f"REASON: {metadata.reason}")
             print(f"PLAN: {metadata.plan}")
-            if metadata.criticism.strip() != "":
-                print(f"SELF-CRITICISM: {metadata.criticism}")
         if FLAG_CONTINUOUS not in sys.argv[1:]:
             run_action = input("Run the action? [Y/n]")
             if run_action.lower() != "y" and run_action != "":

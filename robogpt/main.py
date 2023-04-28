@@ -107,7 +107,7 @@ def main():
             print(f"PLAN: {metadata.plan}")
             if metadata.criticism.strip() != "":
                 print(f"SELF-CRITICISM: {metadata.criticism}")
-        if not FLAG_CONTINUOUS in sys.argv[1:]:
+        if FLAG_CONTINUOUS not in sys.argv[1:]:
             run_action = input("Run the action? [Y/n]")
             if run_action.lower() != "y" and run_action != "":
                 break

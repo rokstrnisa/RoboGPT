@@ -40,7 +40,9 @@ The program does not run in continuous mode by default. To run it in continuous 
 
 ## Speech
 
-To enable speech output, use the command-line flag `--speech`.
+On macOS, run `pip install PyObjC` to install the required dependency for speech.
+
+To enable speech, use the command-line flag `--speech`.
 
 ## Contact
 

@@ -22,6 +22,7 @@ The program was inspired by [some of my earlier work](https://blog.rok.strnisa.c
 
 Planned:
 
+-   :dizzy: Generic parsing and encapsulated action definitions.
 -   :gear: Plug-in system for easy extensibility.
 
 ## Requirements

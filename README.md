@@ -7,13 +7,22 @@ RoboGPT is a simple and extensible program that helps you run GPT-4 model autono
 
 The program was inspired by [some of my earlier work](https://blog.rok.strnisa.com/2023/04/how-i-got-chatgpt-to-write-complete.html) and Auto-GPT.
 
+**License**: This project is released under the [MIT License](LICENSE).
+
 ## Simple Demo
 
 [![A simple demo of RoboGPT.](https://img.youtube.com/vi/mi0D4l7JRtQ/0.jpg)](https://www.youtube.com/watch?v=mi0D4l7JRtQ)
 
 ## Features
 
-The features are very limited at the moment, but more can be added easily.
+-   :robot: Simple and easy to understand codebase.
+-   :wrench: Extensible design for easy contributions.
+-   :arrows_counterclockwise: Continuous mode for ongoing interaction.
+-   :speaker: Speech support (optional) for a more engaging user experience.
+
+Planned:
+
+-   :gear: Plug-in system for easy extensibility.
 
 ## Requirements
 
@@ -51,6 +60,14 @@ If you like this project, consider supporting its further development - [become 
 Current Sponsors:
 
 -   🥉 [Martin Köppelmann](https://github.com/koeppelmann)
+
+## Contributing
+
+Contributions to RoboGPT are very welcome! If you'd like to contribute, please follow these guidelines:
+
+-   Submit issues for bugs or feature requests.
+-   Create pull requests for proposed changes or new features. Make sure your changes are well-documented and follow the project's code style.
+-   Join the community (see below) and participate in discussions to help shape the project's future.
 
 ## Community
 

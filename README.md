@@ -44,6 +44,16 @@ On macOS, run `pip install PyObjC` to install the required dependency for speech
 
 To enable speech, use the command-line flag `--speech`.
 
-## Contact
+## Sponsor
 
-To share your thoughts or simply stay up-to-date, follow [@RokStrnisa](https://twitter.com/intent/follow?screen_name=rokstrnisa).
+If you like this project, consider supporting its further development - [become a supporter](https://github.com/sponsors/rokstrnisa)!
+
+Current Sponsors:
+
+-   🥉 [Martin Köppelmann](https://github.com/koeppelmann)
+
+## Community
+
+Join [RoboGPT Discord server](https://discord.gg/98KeRysd) to get help, discuss ideas and collaborate.
+
+To stay up-to-date, follow [@RokStrnisa](https://twitter.com/intent/follow?screen_name=rokstrnisa).

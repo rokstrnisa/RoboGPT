@@ -1,4 +1,5 @@
 import os
+import sys
 from typing import Optional
 from dotenv import load_dotenv
 import requests
@@ -80,6 +81,9 @@ If you want to run an action that is not in the above list of actions, send the 
 So, write one action and one metadata JSON object, nothing else.
 """
 
+FLAG_SPEECH = "--speech"
+FLAG_CONTINUOUS = "--continuous"
+
 
 def main():
     user_directions = input("What would you like me to do:\n")
@@ -93,8 +97,8 @@ def main():
             assistant_response = gpt.chat(user_directions, general_directions, new_plan, message_history)
         action, metadata = response_parser.parse(assistant_response)
         print(f"ACTION: {action.short_string()}")
-        # Uncomment the line below if you would like to use speech.
-        # speech.say_async(metadata.speak)
+        if FLAG_SPEECH in sys.argv[1:]:
+            speech.say_async(metadata.speak)
         if isinstance(action, actions.ShutdownAction):
             print("Shutting down...")
             break
@@ -103,10 +107,10 @@ def main():
             print(f"PLAN: {metadata.plan}")
             if metadata.criticism.strip() != "":
                 print(f"SELF-CRITICISM: {metadata.criticism}")
-        # Comment out the 3 lines below to remove the confirmation step before running the action.
-        run_action = input("Run the action? [Y/n]")
-        if run_action.lower() != "y" and run_action != "":
-            break
+        if not FLAG_CONTINUOUS in sys.argv[1:]:
+            run_action = input("Run the action? [Y/n]")
+            if run_action.lower() != "y" and run_action != "":
+                break
         action_output = action_runner.run(action)
         message_content = f"Action {action.key()} returned:\n{action_output}"
         message_history.append({"role": "system", "content": message_content})

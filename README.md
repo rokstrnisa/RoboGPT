@@ -36,7 +36,11 @@ Run `python robogpt/main.py` to start the program.
 
 ## Continuous Mode
 
-The program does not run in continuous mode by default. To run it in continuous mode, simply comment out the relevant lines in `main.py`.
+The program does not run in continuous mode by default. To run it in continuous mode, simply use the command-line flag `--continuous`.
+
+## Speech
+
+To enable speech output, use the command-line flag `--speech`.
 
 ## Contact
 

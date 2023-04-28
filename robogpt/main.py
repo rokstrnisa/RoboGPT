@@ -5,7 +5,6 @@ from dotenv import load_dotenv
 from spinner import Spinner
 import actions
 import response_parser
-import action_runner
 import speech
 import gpt
 
@@ -110,7 +109,7 @@ def main():
             run_action = input("Run the action? [Y/n]")
             if run_action.lower() != "y" and run_action != "":
                 break
-        action_output = action_runner.run(action)
+        action_output = action.run()
         message_content = f"Action {action.key()} returned:\n{action_output}"
         message_history.append({"role": "system", "content": message_content})
         change_plan = input("Change the proposed plan? [N/y]")

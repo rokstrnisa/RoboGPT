@@ -18,7 +18,7 @@ def say_async(text: str) -> None:
 def say(text: str) -> None:
     headers = {"Content-Type": "application/json", "xi-api-key": API_KEY}
     data = {"text": text}
-    response = requests.post(API_URL, headers=headers, json=data)
+    response = requests.post(API_URL, headers=headers, json=data, timeout=10)
     if response.status_code == 200:
         with tempfile.NamedTemporaryFile(mode="wb") as temp:
             temp.write(response.content)

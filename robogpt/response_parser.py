@@ -15,6 +15,10 @@ class Metadata:
 def parse(text: str) -> Tuple[actions.Action, Metadata]:
     lines = text.splitlines()
     first_line = lines[0]
+    if first_line.startswith("TELL_USER:"):
+        action = actions.TellUserAction(first_line[10:].strip())
+        metadata = parse_metadata(lines[1:])
+        return action, metadata
     if first_line.startswith("READ_FILE:"):
         action = actions.ReadFileAction(first_line[10:].strip())
         metadata = parse_metadata(lines[1:])

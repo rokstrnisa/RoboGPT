@@ -11,6 +11,17 @@ class Action:
 
 
 @dataclass(frozen=True)
+class TellUserAction(Action):
+    message: str
+
+    def key(self) -> str:
+        return "TELL_USER"
+
+    def short_string(self) -> str:
+        return f'Tell user "{self.message}".'
+
+
+@dataclass(frozen=True)
 class ReadFileAction(Action):
     path: str
 

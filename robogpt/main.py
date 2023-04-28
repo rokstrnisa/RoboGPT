@@ -2,7 +2,6 @@ import os
 import sys
 from typing import Optional
 from dotenv import load_dotenv
-import requests
 from spinner import Spinner
 import actions
 import response_parser
@@ -12,44 +11,43 @@ import gpt
 
 
 message_history = []
-result = None
 
 
-general_directions = """
-Your decisions must always be made independently without seeking user assistance. Play to your strengths as an LLM and pursue simple strategies with no legal complications.
-
-
+GENERAL_DIRECTIONS = """
 CONSTRAINTS:
-1. No user assistance.
-2. Cannot run Python code that requires user input.
+- Cannot run Python code that requires user input.
 
 
 ACTIONS:
 
-1. "READ_FILE": read the current state of a file. The schema for the action is:
+- "TELL_USER": tell the user something. The schema for the action is:
+
+TELL_USER: <TEXT>
+
+- "READ_FILE": read the current state of a file. The schema for the action is:
 
 READ_FILE: <PATH>
 
-2. "WRITE_FILE": write a block of text to a file. The schema for the action is:
+- "WRITE_FILE": write a block of text to a file. The schema for the action is:
 
 WRITE_FILE: <PATH>
 ```
 <TEXT>
 ```
 
-3. "RUN_PYTHON": run a Python file. The schema for the action is:
+- "RUN_PYTHON": run a Python file. The schema for the action is:
 
 RUN_PYTHON: <PATH>
 
-4. "SEARCH_ONLINE": search online and get back a list of URLs relevant to the query. The schema for the action is:
+- "SEARCH_ONLINE": search online and get back a list of URLs relevant to the query. The schema for the action is:
 
 SEARCH_ONLINE: <QUERY>
 
-5. EXTRACT_INFO: extract specific information from a webpage. The schema for the action is:
+- EXTRACT_INFO: extract specific information from a webpage. The schema for the action is:
 
 EXTRACT_INFO: <URL>, <a brief instruction to GPT for information to extract>
 
-6. "SHUTDOWN": shut down the program. The schema for the action is:
+- "SHUTDOWN": shut down the program. The schema for the action is:
 
 SHUTDOWN
 
@@ -81,6 +79,7 @@ If you want to run an action that is not in the above list of actions, send the 
 So, write one action and one metadata JSON object, nothing else.
 """
 
+FLAG_VERBOSE = "--verbose"
 FLAG_SPEECH = "--speech"
 FLAG_CONTINUOUS = "--continuous"
 
@@ -94,7 +93,9 @@ def main():
     while True:
         print("========================")
         with Spinner("Thinking..."):
-            assistant_response = gpt.chat(user_directions, general_directions, new_plan, message_history)
+            assistant_response = gpt.chat(user_directions, GENERAL_DIRECTIONS, new_plan, message_history)
+        if FLAG_VERBOSE in sys.argv[1:]:
+            print(f"ASSISTANT RESPONSE: {assistant_response}")
         action, metadata = response_parser.parse(assistant_response)
         print(f"ACTION: {action.short_string()}")
         if FLAG_SPEECH in sys.argv[1:]:

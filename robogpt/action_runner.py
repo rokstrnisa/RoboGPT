@@ -1,7 +1,6 @@
 import io
 import os
 import subprocess
-import time
 
 import actions
 import gpt
@@ -15,6 +14,9 @@ from spinner import Spinner
 
 def run(action: actions.Action) -> str:
     try:
+        if isinstance(action, actions.TellUserAction):
+            print(f"Response: {action.message}")
+            return action.message
         if isinstance(action, actions.ReadFileAction):
             if not os.path.exists(action.path):
                 print(f"RESULT: File `{action.path}` does not exist.")

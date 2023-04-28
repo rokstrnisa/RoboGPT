@@ -6,6 +6,7 @@
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/robogpt/main.py",
+            "args": ["--verbose"],
             "console": "integratedTerminal",
             "justMyCode": true
         }

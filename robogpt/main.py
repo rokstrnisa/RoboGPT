@@ -83,7 +83,6 @@ def main():
     general_directions += "\n\n"
     general_directions += "If you want to run an action that is not in the above list of actions, send the SHUTDOWN action instead and explain in 'reason' which action you wanted to run.\n"
     general_directions += "So, write one action and one metadata JSON object, nothing else."
-    print(general_directions)
     load_dotenv()
     os.makedirs("workspace", exist_ok=True)
     os.chdir("workspace")
@@ -92,7 +91,7 @@ def main():
     while True:
         print("========================")
         with Spinner("Thinking..."):
-            assistant_response = gpt.chat(user_directions, GENERAL_DIRECTIONS_PREFIX, new_plan, message_history)
+            assistant_response = gpt.chat(user_directions, general_directions, new_plan, message_history)
         if FLAG_VERBOSE in sys.argv[1:]:
             print(f"ASSISTANT RESPONSE: {assistant_response}")
         action, metadata = response_parser.parse(assistant_response)
